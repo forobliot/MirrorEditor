@@ -145,27 +145,28 @@ angular.module('mirrorEditorApp')
     $scope.choose = function(type) {
         $http.get(mirrorSvc.apiurl + ownerGroup.id + '/nextref').success(function(data) {
             $scope.question.questionRef = data;
+            $scope.question.title = 'Titolo';
             switch (type) {
                 case 1:
                     $scope.question.Data = { Options: [ { Label: 'Vero', IsCorrect: true }, { Label: 'Falso' }] };
                     break;
                 case 2:
-                    $scope.question.Data = { Options: [ { Label: 'opzione 1', IsCorrect: true }, { Label: 'Opzione 2' }] };
+                    $scope.question.Data = { Options: [ { Label: 'opzione 1', IsCorrect: true }, { Label: 'opzione 2' }] };
                     break;
                 case 3:
-                    $scope.question.Data = { Options: [ { Label: 'opzione 1', IsCorrect: true }, { Label: 'Opzione 2' }] };
+                    $scope.question.Data = { Options: [ { Label: 'opzione 1', IsCorrect: true }, { Label: 'opzione 2' }] };
                     break;
                 case 4:
                     $scope.question.Data = { Answers: [ 'risposta' ] };
                     break;
                 case 5:
-                    $scope.question.Data = { Answers: [ 'risposta 1', 'risposta 2' ] };
+                    $scope.question.Data = { Answers: [ 'risposta 1' ] };
                     break;
                 case 6:
                     $scope.question.Data = { LowValue: 1.0, HighValue: 2.0 };
                     break;
                 case 7:
-                    $scope.question.Data = { Options: [ { Label: 'opzione 1', IsCorrect: true }, { Label: 'Opzione 2' }] };
+                    $scope.question.Data = { Options: [ { Label: 'opzione 1', IsCorrect: true }, { Label: 'opzione 2' }] };
                     break;
             }
 
