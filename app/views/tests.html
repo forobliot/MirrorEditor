@@ -1,0 +1,24 @@
+<h3><span class="glyphicon glyphicon-th-list"></span> Elenco test</h3>
+<nav class="navbar navbar-default">
+	<ul class="nav navbar-nav">
+		<li><a href="#/test">Nuovo test</a></li>
+	</ul>
+</nav>
+<table class="table table-condensed table-hover">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Titolo</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="t in tests">
+			<td>{{ t.Id }}</td>
+			<td>{{ t.Title }}</td>
+			<td>
+				<a href="#/test/{{ t.Id }}">Modifica</a>
+			</td>
+		</tr>
+	</tbody>
+</table>

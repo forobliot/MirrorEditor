@@ -1,0 +1,36 @@
+<h3>
+	<span class="glyphicon glyphicon-ok"></span> Elenco domande 
+	<small ng-show="subset">nel serbatoio {{ subset.subsetRef }}</small>
+</h3>
+<nav class="navbar navbar-default">
+	<ul class="nav navbar-nav">
+		<li><a href="#/question">Nuova domanda</a></li>
+	</ul>
+</nav>
+<div class="panel panel-default">
+	<div class="panel-body">
+	   <input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" placeholder="Ricerca domanda" title="" ng-model="search">
+	</div>
+</div>
+<table class="table table-condensed table-hover">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Tipo</th>
+			<th>Ref</th>
+			<th>Titolo</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="q in questions | filter:search">
+			<td>{{ q.Id }}</td>
+			<td>{{ q.Type }}</td>
+			<td>{{ q.Ref }}</td>
+			<td>{{ q.Title }}</td>
+			<td>
+				<a href="#/question/{{ q.Id }}">Modifica</a>
+			</td>
+		</tr>
+	</tbody>
+</table>

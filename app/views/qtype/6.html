@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Impostazioni Range numerico
+	</div>
+	<div class="panel-body">
+		<div ng-class="{ 'has-error': xForm.lowValue.$invalid && !xForm.lowValue.$pristine }" class="form-group">
+			<label for="">Valore minimo</label>
+			<input type="number" name="lowValue" class="form-control" value="" ng-model="question.Data.LowValue" step="any">
+			<p ng-show="xForm.lowValue.$invalid && !xForm.lowValue.$pristine" class="help-block">Valore non valido</p>
+		</div>
+		<div ng-class="{ 'has-error': xForm.highValue.$invalid && !xForm.highValue.$pristine }" class="form-group">
+			<label for="">Valore massimo</label>
+			<input type="number" name="highValue" class="form-control" value="" ng-model="question.Data.HighValue" step="any">
+			<p ng-show="xForm.highValue.$invalid && !xForm.highValue.$pristine" class="help-block">Valore non valido</p>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Impostazioni Fill-in
+	</div>
+	<div class="panel-body">
+		<div ng-class="{ 'has-error': xForm.answer.$invalid && !xForm.answer.$pristine }" class="form-group" ng-hide="question.Data.IsOpen">
+			<label for="">Risposta corretta</label>
+			<textarea required name="answer" rows="5" class="form-control" ng-model="question.Data.Answers[0]"></textarea>
+			<p ng-show="xForm.answer.$invalid && !xForm.answer.$pristine" class="help-block">Testo obbligatorio</p>
+		</div>
+		<div class="checkbox" ng-hide="question.Data.IsOpen">
+			<label>
+				<input type="checkbox" value="" ng-model="question.Data.IsCaseSensitive">
+				Case Sensitive
+			</label>
+		</div>
+		<div class="checkbox" ng-hide="question.Data.IsOpen">
+			<label>
+				<input type="checkbox" value="" ng-model="question.Data.IsStrip">
+				Elimina spazi nella risposta
+			</label>
+		</div>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" value="" ng-model="question.Data.IsOpen" ng-click="question.Data.Answers[0] = question.Data.IsOpen ? 'risposta' : question.Data.Answers[0]">
+				Domanda aperta senza valutazione
+			</label>
+		</div>
+	</div>
+</div>

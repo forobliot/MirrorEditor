@@ -1,0 +1,24 @@
+<h3>Elenco Gruppi Owners</h3>
+<div class="panel panel-default">
+	<div class="panel-body">
+	   <input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title="" ng-model="search">
+	</div>
+</div>
+<table class="table table-condensed table-hover">
+	<thead>
+		<tr>
+			<th class="text-right">Id</th>
+			<th>Nome</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="o in owners | filter:search">
+			<td class="text-right">{{ o.id }}</td>
+			<td>{{ o.groupName }}</td>
+			<td>
+				<button type="button" class="btn btn-primary btn-xs" ng-click="selectGroup(o)">Seleziona</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

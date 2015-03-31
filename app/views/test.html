@@ -1,0 +1,82 @@
+<h3 ng-show="test.id">Impostazioni test</h3>
+<h3 ng-hide="test.id">Nuovo test</h3>
+<form name="xForm" ng-submit="save()" role="form">
+	<div class="row" ng-show="test.id">
+		<div class="form-group col-lg-4">
+			<label for="">Id</label>
+			<input class="form-control" id="" ng-model="test.id" readonly="">
+		</div>
+	</div>
+	<div class="form-group" ng-class="{ 'has-error': xForm.testRef.$invalid && !xForm.testRef.$pristine }">
+		<label for="">Ref</label>
+		<input name="testRef" type="text" class="form-control" id="" placeholder="riferimento del test" ng-model="test.testRef" required>
+		<p ng-show="xForm.testRef.$invalid && !xForm.testRef.$pristine" class="help-block">Campo obbligatorio</p>
+	</div>
+	<div class="form-group" ng-class="{ 'has-error': xForm.title.$invalid && !xForm.title.$pristine }">
+		<label for="">Titolo</label>
+		<input name="title" type="text" class="form-control" id="" placeholder="titolo del test" ng-model="test.title" required>
+		<p ng-show="xForm.title.$invalid && !xForm.title.$pristine" class="help-block">Campo obbligatorio</p>
+	</div>
+	<div class="row">
+		<div class="form-group col-lg-4" ng-class="{ 'has-error': xForm.questions.$invalid && !xForm.questions.$pristine }">
+			<label for="">Numero domande</label>
+			<input name="questions" type="number" class="form-control" id="" placeholder="valore da 0 a 100" ng-model="test.questions" min="0" max="100">
+			<p ng-show="xForm.questions.$invalid && !xForm.questions.$pristine" class="help-block">Valore non valido</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group col-lg-4">
+			<label for="">Tipo estrazione</label>
+			<select class="form-control" ng-model="test.extraction" ng-options="item.value as item.label for item in extractionModes"></select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group col-lg-4" ng-class="{ 'has-error': xForm.threshold.$invalid && !xForm.threshold.$pristine }">
+			<label for="">Soglia</label>
+			<input name="threshold" type="number" class="form-control" id="" placeholder="valore decimale" ng-model="test.threshold">
+			<p ng-show="xForm.threshold.$invalid && !xForm.threshold.$pristine" class="help-block">Valore non valido</p>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="">Note</label>
+		<textarea rows="5" class="form-control" ng-model="test.description"></textarea>
+	</div>
+	<div class="row">
+		<div class="form-group col-lg-4" ng-class="{ 'has-error': xForm.weightCorrect.$invalid && !xForm.weightCorrect.$pristine }">
+			<label for="">Peso domande corrette</label>
+			<input name="weightCorrect" type="number" class="form-control" id="" placeholder="valore decimale" ng-model="test.weightCorrect">
+			<p ng-show="xForm.weightCorrect.$invalid && !xForm.weightCorrect.$pristine" class="help-block">Valore non valido</p>
+		</div>
+		<div class="form-group col-lg-4" ng-class="{ 'has-error': xForm.weightUnanswered.$invalid && !xForm.weightUnanswered.$pristine }">
+			<label for="">Peso domande senza risposta</label>
+			<input name="weightUnanswered" type="number" class="form-control" id="" placeholder="valore decimale" ng-model="test.weightUnanswered">
+			<p ng-show="xForm.weightUnanswered.$invalid && !xForm.weightUnanswered.$pristine" class="help-block">Valore non valido</p>
+		</div>
+		<div class="form-group col-lg-4" ng-class="{ 'has-error': xForm.weightWrong.$invalid && !xForm.weightWrong.$pristine }">
+			<label for="">Peso domande non corrette</label>
+			<input name="weightWrong" type="number" class="form-control" id="" placeholder="valore decimale" ng-model="test.weightWrong">
+			<p ng-show="xForm.weightWrong.$invalid && !xForm.weightWrong.$pristine" class="help-block">Valore non valido</p>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="">Feedback positivo</label>
+		<textarea rows="5" class="form-control" ng-model="test.feedbackPos"></textarea>
+	</div>
+	<div class="form-group">
+		<label for="">Feedback negativo</label>
+		<textarea rows="5" class="form-control" ng-model="test.feedbackNeg"></textarea>
+	</div>
+	<div class="form-group">
+		<label for="">Introduzione</label>
+		<textarea rows="5" class="form-control" ng-model="test.introduction"></textarea>
+	</div>
+	<div class="form-group">
+		<label for="">Conclusioni</label>
+		<textarea rows="5" class="form-control" ng-model="test.conclusion"></textarea>
+	</div>
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="button" class="btn btn-default" ng-click="go('/tests')">Annulla</button>
+		<button ng-show="test.id" type="button" class="btn btn-danger" ng-click="delete()">Elimina</button>
+	</div>
+</form>

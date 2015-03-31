@@ -1,0 +1,13 @@
+<h3>Elenco pool</h3>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Nome</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="pool in poolList">
+			<td><a href="#/pool/{{pool.id}}">{{ pool.name }}</td>
+		</tr>
+	</tbody>
+</table>

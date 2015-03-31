@@ -1,0 +1,27 @@
+<h3><span class="glyphicon glyphicon-th"></span> Elenco serbatoi</h3>
+<nav class="navbar navbar-default">
+	<ul class="nav navbar-nav">
+		<li><a href="#/subset">Nuovo serbatoio</a></li>
+	</ul>
+</nav>
+<table class="table table-condensed table-hover">
+	<thead>
+		<tr>
+			<th></th>
+			<th class="text-right">Id</th>
+			<th>Ref</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody  my-sortable>
+		<tr ng-repeat="s in subsets">
+			<td><span class="glyphicon glyphicon-align-justify handle"></span></td>
+			<td class="text-right">{{ s.id }}</td>
+			<td>{{ s.subsetRef }}</td>
+			<td>
+				<a href="#/subset/{{ s.id }}">Modifica</a>
+				<a href="#/questions/insubset/{{ s.id }}">Domande</a>
+			</td>
+		</tr>
+	</tbody>
+</table>

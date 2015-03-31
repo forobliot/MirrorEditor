@@ -1,0 +1,110 @@
+<h3>
+	<span class="glyphicon glyphicon-ok"></span>
+	<span ng-show="question.id">Impostazioni domanda</span>
+	<span ng-hide="question.id">Nuova domanda</span>
+	<small ng-show="subset">nel serbatoio {{ subset.subsetRef }}</small>
+</h3>
+<div ng-hide="question.type" ng-cloak>
+	<h4>Scelta tipologia</h4>
+	<div class="list-group">
+		<a ng-click="choose(type.value)" href="" class="list-group-item" ng-repeat="type in questionTypes">{{ type.label }}</a>
+	</div>
+</div>
+<div ng-show="question.type" ng-cloak>
+	<form name="xForm" ng-submit="save()" role="form">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="row">
+					<div class="form-group col-lg-6">
+						<label for="">Tipologia</label>
+						<input class="form-control" id="" ng-value="questionTypes[question.type - 1].label" readonly="">
+					</div>
+					<div class="form-group col-lg-6" ng-show="question.id">
+						<label for="">Id</label>
+						<input class="form-control" id="" ng-model="question.id" readonly="">
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': xForm.questionRef.$invalid && !xForm.questionRef.$pristine }">
+					<label for="">Ref</label>
+					<input name="questionRef" type="text" class="form-control" id="" placeholder="riferimento della domanda" ng-model="question.questionRef" required>
+					<p ng-show="xForm.questionRef.$invalid && !xForm.questionRef.$pristine" class="help-block">Campo obbligatorio</p>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': xForm.title.$invalid && !xForm.title.$pristine }">
+					<label for="">Titolo</label>
+					<textarea required name="title" rows="5" class="form-control" ng-model="question.title"></textarea>
+					<p ng-show="xForm.title.$invalid && !xForm.title.$pristine" class="help-block">Campo obbligatorio</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group" ng-include="'views/qtype/' + (question.type || '0') + '.html'">
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Altre impostazioni <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#more" ng-click="open = !open">{{ open ? "Chiudi" : "Apri "}}</button>
+			</div>
+
+			<div class="panel-body collapse" id="more">
+				<div class="form-group">
+					<label for="">Introduzione</label>
+					<textarea rows="5" class="form-control" ng-model="question.introduction"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="">Conclusione</label>
+					<textarea rows="5" class="form-control" ng-model="question.conclusion"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="">Feedback positivo</label>
+					<textarea rows="5" class="form-control" ng-model="question.feedbackPos"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="">Feedback negativo</label>
+					<textarea rows="5" class="form-control" ng-model="question.feedbackNeg"></textarea>
+				</div>
+				<div class="row">
+					<div class="form-group col-lg-4" ng-class="{ 'has-error': xForm.weightCorrect.$invalid && !xForm.weightCorrect.$pristine }">
+						<label for="">Peso risposta corretta</label>
+						<input name="weightCorrect" type="number" class="form-control" id="" placeholder="valore decimale" ng-model="question.weightCorrect" step="any">
+						<p ng-show="xForm.weightCorrect.$invalid && !xForm.weightCorrect.$pristine" class="help-block">Valore non valido</p>
+					</div>
+					<div class="form-group col-lg-4" ng-class="{ 'has-error': xForm.weightUnanswered.$invalid && !xForm.weightUnanswered.$pristine }">
+						<label for="">Peso senza risposta</label>
+						<input name="weightUnanswered" type="number" class="form-control" id="" placeholder="valore decimale" ng-model="question.weightUnanswered" step="any">
+						<p ng-show="xForm.weightUnanswered.$invalid && !xForm.weightUnanswered.$pristine" class="help-block">Valore non valido</p>
+					</div>
+					<div class="form-group col-lg-4" ng-class="{ 'has-error': xForm.weightWrong.$invalid && !xForm.weightWrong.$pristine }">
+						<label for="">Peso risposta non corretta</label>
+						<input name="weightWrong" type="number" class="form-control" id="" placeholder="valore decimale" ng-model="question.weightWrong" step="any">
+						<p ng-show="xForm.weightWrong.$invalid && !xForm.weightWrong.$pristine" class="help-block">Valore non valido</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-lg-4" >
+						<label for="">Tipo peso</label>
+						<select class="form-control" ng-options="item.value as item.label for item in typeWeights" ng-model="question.typeWeight"></select>
+					</div>
+					<div class="form-group col-lg-4" ng-class="{ 'has-error': xForm.minValue.$invalid && !xForm.minValue.$pristine }">
+						<label for="">Valore minimo</label>
+						<input name="minValue" type="number" class="form-control" id="" placeholder="valore decimale" ng-model="question.minValue" step="0.01">
+						<p ng-show="xForm.minValue.$invalid && !xForm.minValue.$pristine" class="help-block">Valore non valido</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group" ng-hide="deleteConfirm || cancelConfirm">
+			<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Salva</button>
+			<button type="button" class="btn btn-default" ng-click="cancel()">{{ xForm.$pristine ? 'Elenco' : 'Annulla' }}</button>
+			<button ng-show="question.id" type="button" class="btn btn-danger" ng-click="deleteConfirm = true"><span class="glyphicon glyphicon-remove"></span> Elimina</button>
+		</div>
+		<div class="form-group" ng-show="deleteConfirm">
+			Vuoi veramente eliminare la domanda? <button type="button" class="btn btn-danger btn-xs" ng-click="delete()">Sì</button>
+			<button type="button" class="btn btn-default btn-xs" ng-click="deleteConfirm = false">No</button>
+		</div>
+		<div class="form-group" ng-show="cancelConfirm">
+			Vuoi veramente abbandonare le modifiche senza salvare? <button type="button" class="btn btn-danger btn-xs" ng-click="go('/questions')">Sì</button>
+			<button type="button" class="btn btn-default btn-xs" ng-click="cancelConfirm = false">No</button>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,19 @@
+<h3><span class="glyphicon glyphicon-th"></span> Serbatoio</h3>
+<form name="xForm" ng-submit="save()" role="form">
+	<div class="row" ng-show="subset.id">
+		<div class="form-group col-lg-4">
+			<label for="">Id</label>
+			<input class="form-control" id="" ng-model="subset.id" readonly="">
+		</div>
+	</div>
+	<div class="form-group" ng-class="{ 'has-error': xForm.subsetRef.$invalid && !xForm.subsetRef.$pristine }">
+		<label for="">Ref</label>
+		<input name="subsetRef" type="text" class="form-control" id="" placeholder="riferimento del questionario" ng-model="subset.subsetRef" required>
+		<p ng-show="xForm.subsetRef.$invalid && !xForm.subsetRef.$pristine" class="help-block">Campo obbligatorio</p>
+	</div>
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="button" class="btn btn-default" ng-click="go('/subsets')">Annulla</button>
+		<button ng-show="subset.id" type="button" class="btn btn-danger" ng-click="delete()">Elimina</button>
+	</div>
+</form>

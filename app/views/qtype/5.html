@@ -1,0 +1,35 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Impostazioni Fill-in con più risposte
+	</div>
+	<div class="panel-body">
+		<table class="table table-condensed vert-align-middle">
+			<thead>
+				<tr><th></th><th>Risposte corrette <button type="button" class="btn btn-primary btn-xs" ng-click="addAnswer()"><span class="glyphicon glyphicon-plus"></span> Aggiungi risposta</button></th><th></th></tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="a in question.Data.Answers track by $index">
+					<td class="text-right">{{ $index + 1 }}.</td>
+					<td ng-class="{ 'has-error': xForm['answer-' + $index].$invalid && !xForm['answer-' + $index].$pristine }">
+						<textarea required name="{{ 'answer-' + $index }}"rows="5" class="form-control" ng-model="a"></textarea>
+						<p ng-show="xForm['answer-' + $index].$invalid && !xForm['answer-' + $index].$pristine" class="help-block">Testo obbligatorio</p>
+					</td>
+					<td><button type="button" class="btn btn-danger btn-xs" ng-click="deleteAnswer($index)"><span class="glyphicon glyphicon-remove"></span> Elimina</button></td>
+				</tr> 
+				<tr ng-hide="question.Data.Answers.length"><td colspan="3">Nessuna risposta definita</td></tr>
+			</tbody>
+		</table>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" value="" ng-model="question.Data.IsCaseSensitive">
+				Case Sensitive
+			</label>
+		</div>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" value="" ng-model="question.Data.IsStrip">
+				Elimina spazi nella risposta
+			</label>
+		</div>
+	</div>
+</div>
