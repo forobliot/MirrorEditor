@@ -25,12 +25,12 @@
 					</div>
 				</div>
 				<div class="form-group" ng-class="{ 'has-error': xForm.questionRef.$invalid && !xForm.questionRef.$pristine }">
-					<label for="">Ref</label>
+					<label for="">Codice domanda</label>
 					<input name="questionRef" type="text" class="form-control" id="" placeholder="riferimento della domanda" ng-model="question.questionRef" required>
 					<p ng-show="xForm.questionRef.$invalid && !xForm.questionRef.$pristine" class="help-block">Campo obbligatorio</p>
 				</div>
 				<div class="form-group" ng-class="{ 'has-error': xForm.title.$invalid && !xForm.title.$pristine }">
-					<label for="">Titolo</label>
+					<label for="">Testo</label>
 					<textarea required name="title" rows="5" class="form-control" ng-model="question.title"></textarea>
 					<p ng-show="xForm.title.$invalid && !xForm.title.$pristine" class="help-block">Campo obbligatorio</p>
 				</div>
@@ -86,7 +86,7 @@
 					</div>
 					<div class="form-group col-lg-4" ng-class="{ 'has-error': xForm.minValue.$invalid && !xForm.minValue.$pristine }">
 						<label for="">Valore minimo</label>
-						<input name="minValue" type="number" class="form-control" id="" placeholder="valore decimale" ng-model="question.minValue" step="0.01">
+						<input name="minValue" type="number" class="form-control" id="" placeholder="valore decimale" ng-model="question.minValue" step="any">
 						<p ng-show="xForm.minValue.$invalid && !xForm.minValue.$pristine" class="help-block">Valore non valido</p>
 					</div>
 				</div>

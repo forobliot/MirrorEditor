@@ -95,7 +95,7 @@ angular.module('mirrorEditorApp')
                 });
 
                 if (trueOptions < $scope.question.Data.MinAnswer) {
-                    toaster.pop({ type: 'error', timeout: 5000, title: 'Domanda non salvata', body: 'MinAnswer deve essere minore o uguale delle opzioni corrette.' });
+                    toaster.pop({ type: 'error', timeout: 5000, title: 'Domanda non salvata', body: 'Minimo risposte corrette deve essere minore o uguale delle opzioni corrette.' });
                     return;
                 }
                 break;
