@@ -14,7 +14,7 @@ angular.module('mirrorEditorApp')
 
     this.apiurl = 'http://mirroreditor.ctu.unimi.it/api/';
     // commentare se in produzione
-    this.apiurl = 'http://api.unimi.it/mirrorapi/';
+    //this.apiurl = 'http://api.unimi.it/mirrorapi/';
     
     
     this.selectGroup = function(group) {
