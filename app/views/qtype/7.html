@@ -1,43 +1,47 @@
-<div class="panel panel-default">
-	<div class="panel-heading">
-		Impostazioni Multi Select con minimi risposte
+<div class="ibox-title">
+	<h5>Impostazioni Multi Select con minimi risposte</h5>
+	<div class="ibox-tools">
+		<a class="collapse-link">
+			<i class="fa fa-chevron-up"></i>
+		</a>
 	</div>
-	<div class="panel-body">
-		<table class="table table-condensed vert-align-middle">
-			<thead>
-				<tr><th></th><th></th><th>Opzione <button type="button" class="btn btn-primary btn-xs" ng-click="addOption()">Aggiungi opzione</button></th><th>Corretta</th><th>Peso</th><th></th></tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="o in question.Data.Options">
-					<td>
-						<div ng-hide="$first"><a ng-click="invertOption(-1, $index)"><span class="glyphicon glyphicon-circle-arrow-up"></span></a></div>
+</div>
 
-						<div ng-hide="$last"><a ng-click="invertOption(1, $index)"><span class="glyphicon glyphicon-circle-arrow-down"></span></a></div>
-					</td>
-					<td class="text-right">{{ $index + 1 }}.</td>
-					<td ng-class="{ 'has-error': xForm['option-' + $index].$invalid && !xForm['option-' + $index].$pristine }">
-						<textarea name="{{ 'option-' + $index }}" rows="5" class="form-control" ng-model="o.Label" required></textarea>
-						<p ng-show="xForm['option-' + $index].$invalid && !xForm['option-' + $index].$pristine" class="help-block">Testo obbligatorio</p>
-					</td>
-					<td><div class="checkbox">
-						<label>
-							<input type="checkbox" value="" ng-model="o.IsCorrect" ng-change="singleselect(o)">
-							Corretta
-						</label>
-					</div></td>
-					<td ng-class="{ 'has-error': xForm['weight-' + $index].$invalid && !xForm['weight-' + $index].$pristine }">
-						<input name="{{ 'weight-' + $index }}" type="number" id="input" class="form-control" value="" title="" ng-model="o.Weight" step="any">
-						<p ng-show="xForm['weight-' + $index].$invalid && !xForm['weight-' + $index].$pristine" class="help-block">Valore non valido</p>
-					</td>
-					<td><button type="button" class="btn btn-danger btn-xs" ng-click="deleteOption($index)">Elimina</button></td>
-				</tr> 
-				<tr ng-hide="question.Data.Options.length"><td colspan="3">Nessuna opzione definita</td></tr>
-			</tbody>
-		</table>
-		<div class="form-group" ng-class="{ 'has-error': xForm.minAnswer.$invalid && !xForm.minAnswer.$pristine }">
-			<label for="">Minimo risposte corrette</label>
-			<input name="minAnswer" id="" class="form-control" value="" ng-pattern="/^\d+$/" title="" ng-model="question.Data.MinAnswer">
-			<p ng-show="xForm.minAnswer.$invalid && !xForm.minAnswer.$pristine" class="help-block">Valore non valido</p>
-		</div>
+<div class="ibox-content">
+	<table class="table table-condensed vert-align-middle">
+		<thead>
+			<tr><th></th><th></th><th>Opzione <button type="button" class="btn btn-primary btn-xs" ng-click="addOption()">Aggiungi opzione</button></th><th>Corretta</th><th>Peso</th><th></th></tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="o in question.Data.Options">
+				<td>
+					<div ng-hide="$first"><a ng-click="invertOption(-1, $index)"><span class="glyphicon glyphicon-circle-arrow-up"></span></a></div>
+
+					<div ng-hide="$last"><a ng-click="invertOption(1, $index)"><span class="glyphicon glyphicon-circle-arrow-down"></span></a></div>
+				</td>
+				<td class="text-right">{{ $index + 1 }}.</td>
+				<td ng-class="{ 'has-error': xForm['option-' + $index].$invalid && !xForm['option-' + $index].$pristine }">
+					<textarea name="{{ 'option-' + $index }}" rows="5" class="form-control" ng-model="o.Label" required></textarea>
+					<p ng-show="xForm['option-' + $index].$invalid && !xForm['option-' + $index].$pristine" class="help-block">Testo obbligatorio</p>
+				</td>
+				<td><div class="checkbox">
+					<label>
+						<input type="checkbox" value="" ng-model="o.IsCorrect" ng-change="singleselect(o)">
+						Corretta
+					</label>
+				</div></td>
+				<td ng-class="{ 'has-error': xForm['weight-' + $index].$invalid && !xForm['weight-' + $index].$pristine }">
+					<input name="{{ 'weight-' + $index }}" type="number" id="input" class="form-control" value="" title="" ng-model="o.Weight" step="any">
+					<p ng-show="xForm['weight-' + $index].$invalid && !xForm['weight-' + $index].$pristine" class="help-block">Valore non valido</p>
+				</td>
+				<td><button type="button" class="btn btn-danger btn-xs" ng-click="deleteOption($index)">Elimina</button></td>
+			</tr> 
+			<tr ng-hide="question.Data.Options.length"><td colspan="3">Nessuna opzione definita</td></tr>
+		</tbody>
+	</table>
+	<div class="form-group" ng-class="{ 'has-error': xForm.minAnswer.$invalid && !xForm.minAnswer.$pristine }">
+		<label for="">Minimo risposte corrette</label>
+		<input name="minAnswer" id="" class="form-control" value="" ng-pattern="/^\d+$/" title="" ng-model="question.Data.MinAnswer">
+		<p ng-show="xForm.minAnswer.$invalid && !xForm.minAnswer.$pristine" class="help-block">Valore non valido</p>
 	</div>
 </div>

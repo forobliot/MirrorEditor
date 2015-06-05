@@ -25,24 +25,26 @@ var typeWeights = [
  */
 angular.module('mirrorEditorApp')
   .controller('QuestionCtrl', function ($scope, $http, $routeParams, $location, mirrorSvc, toaster) {
-    var ownerGroup = mirrorSvc.getGroup();
-    $scope.subset = mirrorSvc.getSubset();
-
   	$scope.questionTypes = questionTypes;
     $scope.typeWeights = typeWeights;
+	
+    var ownerGroup = null;
+    if ($routeParams.groupId) {
+        ownerGroup = { id: $routeParams.groupId };
+        mirrorSvc.selectGroup(ownerGroup);
+    }
+    else {
+        ownerGroup = mirrorSvc.ownerGroup;
+    }
 
-  	if ($routeParams.id) {
-	    $http.get(mirrorSvc.apiurl + ownerGroup.id + '/question/' + $routeParams.id).success(function(data) {
-            if (data.type === 4 && !data.Data.Answers) {
-                data.Data.Answers = [];
-            }
-	    	$scope.question = data;
-            $scope.question.typeWeight = $scope.question.typeWeight || 0;
-	    });
-	}
-	else {
-		$scope.question = { id: 0 };
-	}
+	mirrorSvc.getQuestion($routeParams.id).success(function(data) {
+		if (data.type === 4 && !data.Data.Answers) {
+			data.Data.Answers = [];
+		}
+
+		$scope.question = data;
+		$scope.question.typeWeight = $scope.question.typeWeight || 0;
+	});
 
     $scope.save = function() {
         var trueOptions = 0;
@@ -67,6 +69,8 @@ angular.module('mirrorEditorApp')
                     toaster.pop({ type: 'error', timeout: 5000, title: 'Domanda non salvata', body: 'La domanda deve contenere almeno 2 opzioni.' });
                     return;
                 }
+                break;
+            case 4:
                 break;
             case 5:
                 if ($scope.question.Data.Answers.length < 1) {
@@ -112,6 +116,8 @@ angular.module('mirrorEditorApp')
                 toaster.pop({ type: 'success', timeout: 2000, title: 'Domanda salvata', body: 'L\'operazione di salvataggio ha avuto successo' });
 	    		$location.path('/question/' + $scope.question.id);
                 $scope.xForm.$setPristine();
+				
+				mirrorSvc.getQuestions(true);
 	    	})
             .error(function(data) {
                 toaster.pop({ type: 'error', timeout: 5000, title: 'Domanda non salvata', body: data.Message });
@@ -122,7 +128,9 @@ angular.module('mirrorEditorApp')
 		    	$location.path('/question/' + data.id);
                 toaster.pop({ type: 'success', timeout: 2000, title: 'Domanda salvata', body: 'La domanda è stata creata con successo successo' });
                 $scope.xForm.$setPristine();
-	    	})
+
+				mirrorSvc.getQuestions(true);
+			})
             .error(function(data) {
                 toaster.pop({ type: 'error', timeout: 5000, title: 'Domanda non salvata', body: data.Message });
             });

@@ -74,6 +74,10 @@ angular
         templateUrl: 'views/question.html',
         controller: 'QuestionCtrl'
       })
+      .when('/question/:id/debug/:groupId', {
+        templateUrl: 'views/question.html',
+        controller: 'QuestionCtrl'
+      })
       .when('/owners', {
         templateUrl: 'views/owners.html',
         controller: 'OwnersCtrl'
@@ -90,9 +94,10 @@ angular
         redirectTo: '/'
       });
   })
-  .run(function(mirrorSvc) {
-
+  .run(function($rootScope, mirrorSvc) {
+	$rootScope.mirrorSvc = mirrorSvc;
     mirrorSvc.loadState();
+	
   })
 
 

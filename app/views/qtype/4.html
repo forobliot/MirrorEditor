@@ -1,11 +1,16 @@
-<div class="panel panel-default">
-	<div class="panel-heading">
-		Impostazioni Fill-in
+<div class="ibox-title">
+	<h5>Impostazioni Fill-in</h5>
+	<div class="ibox-tools">
+		<a class="collapse-link">
+			<i class="fa fa-chevron-up"></i>
+		</a>
 	</div>
-	<div class="panel-body">
-		<div ng-class="{ 'has-error': xForm.answer.$invalid && !xForm.answer.$pristine }" class="form-group" ng-hide="question.Data.IsOpen">
+</div>
+
+<div class="ibox-content">
+	<div ng-class="{ 'has-error': xForm.answer.$invalid && !xForm.answer.$pristine }" class="form-group" ng-hide="question.Data.IsOpen">
 			<label for="">Risposta corretta</label>
-			<textarea required name="answer" rows="5" class="form-control" ng-model="question.Data.Answers[0]"></textarea>
+			<textarea ng-required="!question.Data.IsOpen" name="answer" rows="5" class="form-control" ng-model="question.Data.Answers[0]"></textarea>
 			<p ng-show="xForm.answer.$invalid && !xForm.answer.$pristine" class="help-block">Testo obbligatorio</p>
 		</div>
 		<div class="checkbox" ng-hide="question.Data.IsOpen">
@@ -22,7 +27,7 @@
 		</div>
 		<div class="checkbox">
 			<label>
-				<input type="checkbox" value="" ng-model="question.Data.IsOpen" ng-click="question.Data.Answers[0] = question.Data.IsOpen ? 'risposta' : question.Data.Answers[0]">
+				<input type="checkbox" value="" ng-model="question.Data.IsOpen" ng-click="question.Data.Answers[0] = question.Data.IsOpen ? '' : question.Data.Answers[0]">
 				Domanda aperta senza valutazione
 			</label>
 		</div>
