@@ -71,6 +71,12 @@ angular.module('mirrorEditorApp')
                 }
                 break;
             case 4:
+                if (parseInt($scope.question.Data.MaxLength) > 0) {
+                    $scope.question.Data.MaxLength = parseInt($scope.question.Data.MaxLength);
+                }
+                else {
+                    delete($scope.question.Data.MaxLength);
+                }
                 break;
             case 5:
                 if ($scope.question.Data.Answers.length < 1) {
